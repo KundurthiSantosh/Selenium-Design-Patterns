@@ -1,10 +1,11 @@
 package com.practice.seleniumdesign.test.srp;
 
-import com.practice.seleniumdesign.srp.GoogleMainPage;
-import com.practice.seleniumdesign.srp.GoogleResultPage;
+import com.practice.seleniumdesign.srp.main.GoogleMainPage;
+import com.practice.seleniumdesign.srp.result.GoogleResultPage;
 import com.practice.seleniumdesign.test.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class GoogleTest extends BaseTest {
@@ -18,11 +19,8 @@ public class GoogleTest extends BaseTest {
         this.googleResultPage = new GoogleResultPage(driver);
     }
 
-    @Test
-    public void googleWorkFlowTest(){
-
-        String keyWord = "Selenium";
-        int index = 3;
+    @Test(dataProvider = "data")
+    public void googleWorkFlowTest(String keyWord, int index){
 
         googleMainPage.goTo();
         Assert.assertTrue(googleMainPage.getSearchWidget().isDisplayed());
@@ -43,5 +41,14 @@ public class GoogleTest extends BaseTest {
         System.out.println(
                 googleResultPage.getResultStat().getStat()
         );
+    }
+
+    @DataProvider(name = "data")
+    public Object[][] getData(){
+        return new Object[][]{
+                {"Selenium", 3},
+                {"Docker", 2},
+                {"Java 8", 1}
+        };
     }
 }

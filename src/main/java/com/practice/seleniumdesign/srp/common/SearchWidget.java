@@ -1,10 +1,13 @@
-package com.practice.seleniumdesign.srp;
+package com.practice.seleniumdesign.srp.common;
 
+import com.google.common.util.concurrent.Uninterruptibles;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class SearchWidget extends AbstractComponent{
+import java.util.concurrent.TimeUnit;
+
+public class SearchWidget extends AbstractComponent {
 
     @FindBy(name = "q")
     private WebElement searchBox;
@@ -15,7 +18,10 @@ public class SearchWidget extends AbstractComponent{
 
     public void enter(String keyword){
         this.searchBox.clear();
-        this.searchBox.sendKeys(keyword);
+        for (char ch: keyword.toCharArray()) {
+            Uninterruptibles.sleepUninterruptibly(20, TimeUnit.MILLISECONDS);
+            this.searchBox.sendKeys(ch + "");
+        }
     }
 
     @Override
