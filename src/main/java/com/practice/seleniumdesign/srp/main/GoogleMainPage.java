@@ -26,7 +26,6 @@ public class GoogleMainPage {
     }
 
     public void goTo(){
-        driver.manage().window().maximize();
         driver.get("https://www.google.com");
     }
 }

@@ -16,6 +16,7 @@ public class BaseTest {
     public void setUpDriver(){
         System.setProperty("webdriver.chrome.driver", "/home/santosh/Workspace/Drivers/chromedriver");
         this.driver = new ChromeDriver();
+        this.driver.manage().window().maximize();
     }
 
     @AfterTest
